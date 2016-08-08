@@ -1,11 +1,11 @@
 {
   "name": "emitter-extended",
-  "version": "0.0.3-alpha",
+  "version": "0.0.4-alpha",
   "main": "index.js",
   "private": false,
   "dependencies": {
     "object-assign": "^4.1.0",
-    "opt-setter": "0.0.1-alpha",
+    "opt-setter": "0.0.2-alpha",
     "random-string": "^0.1.2"
   },
   "devDependencies": {
