@@ -1,4 +1,16 @@
 {
-    "presets": ["es2015-ie", "stage-0"],
-    "plugins": [],
+  "env": {
+    "production": {
+      "presets": [["es2015", {"modules": false}], "stage-0"],
+      "plugins": ["transform-decorators-legacy"]
+    },
+    "development": {
+      "presets": [["es2015", {"modules": false}], "stage-0"],
+      "plugins": ["transform-decorators-legacy"]
+    },
+    "cli": {
+      "presets": ["es2015", "stage-0"],
+      "plugins": ["transform-decorators-legacy"]
+    }
+  }
 }

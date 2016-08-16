@@ -40,5 +40,5 @@ function copyFolderRecursiveSync(source, targetFolder) {
   }
 }
 
-const libPath = path.join(path.dirname(__dirname), 'src')
+const libPath = path.join(path.dirname(__dirname), 'es5')
 copyFolderRecursiveSync(libPath, path.dirname(libPath))

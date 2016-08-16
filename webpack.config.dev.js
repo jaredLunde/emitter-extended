@@ -1,46 +1,70 @@
 var path = require('path')
 var webpack = require('webpack')
+var Dashboard = require('webpack-dashboard')
+var DashboardPlugin = require('webpack-dashboard/plugin')
 // var ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+
+var dashboard = new Dashboard()
 
 
 module.exports = {
   // The base directory for resolving the entry option
   context: __dirname,
+  devtool: 'eval',
 
-  // The entry point for the bundle
-  entry: "lib/index",
+  entry: {
+    app: 'index',
+  },
 
   // Various output options, to give us a single bundle.js file with everything resolved and concatenated
   output: {
-    path: path.join(__dirname, 'webpack'),
+    path: path.join(__dirname, '/dist'),
+    publicPath: path.join(__dirname, '/assets/'),
     filename: "emitter-extended.dev.js",
     pathinfo: true
   },
 
-  debug: true,
-  devtool: 'source-map',
-
   // Where to resolve our loaders
+  resolveLoader: {
+    root: path.join(__dirname, 'node_modules')
+  },
   resolve: {
     // Directories that contain our modules
-    root: [__dirname],
-
+    modules: [path.resolve(__dirname, "lib"), "node_modules"],
+    descriptionFiles: ["package.json"],
+    moduleExtensions: ["-loader"],
     // Extensions used to resolve modules
-    extensions: ['', '.js', '.react.js', '.scss', '.css']
+    extensions: ['', '.js', '.scss', '.css']
   },
 
   module: {
     loaders: [
+      /*
       {
-        test: /\/lib\/.*\.js$/,
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style',
+          loader: 'css?group-css-media-queries!sass'
+        })
+      },
+      */
+      {
+        test: /\.js$/,
         loader: 'babel-loader',
         exclude: [/node_modules/]
-      }
+      },
     ],
   },
 
   plugins: [
     new webpack.DefinePlugin({'process.env': {NODE_ENV: '"development"'}}),
+    /**
+    new webpack.optimize.CommonsChunkPlugin({name: "vendor",
+                                             filename: "vendor.dev.js"}),
+    */
+    new DashboardPlugin(dashboard.setData),
+    /* new ExtractTextPlugin('emitter-extended.dev.css') */
   ],
 
   // Include mocks for when node.js specific modules may be required
