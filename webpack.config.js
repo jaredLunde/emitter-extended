@@ -1,20 +1,10 @@
 var path = require('path')
 var webpack = require('webpack')
-// var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 
-
-var stripLogger = 'strip-loader?strip[]=logger.green,' +
-                               'strip[]=logger.red,' +
-                               'strip[]=logger.blue,' +
-                               'strip[]=logger.orange,' +
-                               'strip[]=logger.warn,' +
-                               'strip[]=logger.success,' +
-                               'strip[]=logger.error,' +
-                               'strip[]=console.error,' +
-                               'strip[]=logger.log,' +
-                               'strip[]=logger.print,' +
-                               'strip[]=withPerf'
+var stripLogger = 'strip-loader?strip[]=console.error' +
+                              '&strip[]=console.log' +
+                              '&strip[]=console.warn'
 
 
 module.exports = {
@@ -47,18 +37,9 @@ module.exports = {
 
   module: {
     loaders: [
-      /*
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          loader: 'css?minifier!group-css-media-queries!sass'
-        })
-      },
-      */
       {
         test: /\.js$/,
-        loaders: ['babel-loader', stripLogger, stripLogger],
+        loaders: ['babel', stripLogger],
         exclude: [/node_modules/]
       }
     ],
@@ -87,7 +68,6 @@ module.exports = {
       minimize: true,
       debug: false
     }),
-    /* new ExtractTextPlugin('emitter-extended.css') */
   ],
 
   // Include mocks for when node.js specific modules may be required

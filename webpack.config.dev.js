@@ -2,7 +2,6 @@ var path = require('path')
 var webpack = require('webpack')
 var Dashboard = require('webpack-dashboard')
 var DashboardPlugin = require('webpack-dashboard/plugin')
-// var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 
 var dashboard = new Dashboard()
@@ -51,7 +50,7 @@ module.exports = {
       */
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: 'babel',
         exclude: [/node_modules/]
       },
     ],
@@ -64,7 +63,6 @@ module.exports = {
                                              filename: "vendor.dev.js"}),
     */
     new DashboardPlugin(dashboard.setData),
-    /* new ExtractTextPlugin('emitter-extended.dev.css') */
   ],
 
   // Include mocks for when node.js specific modules may be required
