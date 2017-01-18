@@ -1,15 +1,15 @@
 {
   "name": "emitter-extended",
-  "version": "0.0.6-alpha",
+  "version": "0.1.0",
   "main": "index.js",
   "private": false,
   "dependencies": {
     "object-assign": "^4.1.0",
-    "opt-setter": "0.0.7-alpha",
+    "opt-setter": "^0.1.0",
     "random-string": "^0.1.2"
   },
   "devDependencies": {
-    "webpack2-es7-boilerplate": "*"
+    "webpack2-es7-boilerplate": "^0.1.2"
   },
   "repository": {
     "type": "git",
