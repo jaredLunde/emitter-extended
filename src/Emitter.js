@@ -6,10 +6,11 @@ import EmitterEvent from './EmitterEvent'
 
 
 
-/** Thin wrapper for EventEmitter to enable more predictable event management
-  * and a couple of extra features, namely `after` and `afterAny`.
-  * @extends {EventEmitter}
-  */
+/**
+ * Thin wrapper for EventEmitter to enable more predictable event management
+ * and a couple of extra features, namely `after` and `afterAny`.
+ * @extends {EventEmitter}
+ */
 class Emitter extends EventEmitter {
   static CHANGE = 'change'
   _listenerIdIncr = 0
@@ -98,8 +99,8 @@ class Emitter extends EventEmitter {
       eventName = arguments[0].type
     } else {
       eventName = arguments[0]
-
     }
+    
     const event = new EmitterEvent(eventName, this)
     args.push(event)
 

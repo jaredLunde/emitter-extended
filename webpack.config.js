@@ -12,34 +12,43 @@ module.exports = {
   context: __dirname,
 
   entry: {
-    app: 'index.js',
+    app: 'index.dist'
   },
 
-  // Various output options, to give us a single bundle.js file with everything resolved and concatenated
   output: {
-    path: path.join(__dirname, '/dist'),
-    filename: "emitter-extended.js",
-    pathinfo: true
+    path: path.join(__dirname, 'dist'),
+    filename: 'emitter-extended.js',
+    pathinfo: true,
+    library: "EmitterExtended",
+    libraryTarget: "umd"
+  },
+  /*
+  output: {
+          path: path.join(__dirname, 'dist'),
+          filename: '[chunkhash].js',
+          chunkFilename: '[chunkhash].js'
+      },
+   */
+
+  resolveLoader: {
+    modules: [path.join(__dirname, 'node_modules')],
+    moduleExtensions: ['-loader'],
   },
 
-  // Where to resolve our loaders
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules')
-  },
   resolve: {
     // Directories that contain our modules
-    modules: [path.resolve(__dirname, "lib"), "node_modules"],
-    descriptionFiles: ["package.json"],
-    moduleExtensions: ["-loader"],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    descriptionFiles: ['package.json'],
+    moduleExtensions: ['-loader'],
     // Extensions used to resolve modules
-    extensions: ['', '.js', '.scss', '.css']
+    extensions: ['.js', '.react.js', '.scss', '.css']
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loaders: ['babel', stripLogger],
+        use: ['babel', stripLogger],
         exclude: [/node_modules/]
       }
     ],
@@ -47,12 +56,14 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({'process.env': {NODE_ENV: '"production"'}}),
-    /**
-    new webpack.optimize.CommonsChunkPlugin({name: "vendor",
-                                             filename: "vendor.js"}),
+    /*
+    new webpack.optimize.AggressiveSplittingPlugin({
+                minSize: 30000,
+                maxSize: 50000
+    }),
+    new webpack.optimize.CommonsChunkPlugin({names: ['vendor'],
+                                             filename: 'vendor.js'}),
     */
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         pure_getters: true,
@@ -67,7 +78,7 @@ module.exports = {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
-    }),
+    })
   ],
 
   // Include mocks for when node.js specific modules may be required

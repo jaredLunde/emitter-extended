@@ -1,4 +1,4 @@
-import setOpt from 'opt-setter/setOpt'
+import {setOpt} from 'opt-setter'
 
 
 class EmitterEvent {
