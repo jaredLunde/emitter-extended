@@ -4,7 +4,11 @@
   "main": "es/index",
   "module": "es/index",
   "jsnext:main": "es/index",
-  "private": true,
+  "private": false,
+  "dependencies": {
+    "opt-setter": "^0.2.0",
+    "random-string": "^0.1.2"
+  },
   "devDependencies": {
     "webpack2-env-boilerplate": "^0.1.11"
   },
