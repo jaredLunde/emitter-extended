@@ -2,6 +2,7 @@
   "env": {
     "production": {
       "presets": [
+        "es2015-rollup",
         [
           "env", {
               "debug": true,
