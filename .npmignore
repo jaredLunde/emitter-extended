@@ -1,3 +1,4 @@
 # Remote Sync
 .remote-sync.json
 node_modules
+.babelrc
